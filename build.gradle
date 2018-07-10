@@ -1,0 +1,23 @@
+group 'io.github.saltytt'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'net.dv8tion:JDA:3.6.0_356'
+    compile "org.slf4j:slf4j-api:1.6.1"
+    compile "org.slf4j:slf4j-simple:1.6.1"
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.14'
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.4.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.1.Final'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

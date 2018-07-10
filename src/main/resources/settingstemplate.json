@@ -1,0 +1,18 @@
+{
+  "botkey": "",
+  "districts": [
+    {
+      "name": "dis1",
+      "aliases": [
+        "d1",
+        "1"
+      ]
+    }, {
+      "name": "dis2",
+      "aliases": [
+        "d2",
+        "2"
+      ]
+    }
+  ]
+}
