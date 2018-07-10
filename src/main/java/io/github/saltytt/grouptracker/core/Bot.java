@@ -38,7 +38,8 @@ public class Bot {
                 .registerCommand(new JoinCommand())
                 .registerCommand(new LeaveCommand())
                 .registerCommand(new RemoveCommand())
-                .registerCommand(new PromoteCommand());
+                .registerCommand(new PromoteCommand())
+                .registerCommand(new ForceCommand());
         reactionHandler = new ReactionHandler();
         DistrictManager.standard.refreshDistricts();
         GroupManager.standard.init();
