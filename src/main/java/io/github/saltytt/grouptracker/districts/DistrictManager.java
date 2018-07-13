@@ -17,6 +17,30 @@ import java.util.*;
 import java.util.List;
 
 public class DistrictManager {
+    private static String[] staticDistricts = {
+        "Jellybean Junction",
+        "Rake River",
+        "Hypno Harbor",
+        "Splatville",
+        "Quicksand Quarry",
+        "Piano Peaks",
+        "Lazy Lagoon",
+        "Feather Field",
+        "High-Dive Hills",
+        "Boulderbury",
+        "Marble Mountains",
+        "Jollywood",
+        "Whistle Woods",
+        "Seltzer Summit",
+        "Geyser Gulch",
+        "Kazoo Kanyon",
+        "Opera Oasis",
+        "Comical Canyon",
+        "Bamboozle Bay",
+        "Foghorn Falls",
+        "Bugle Bay"
+    };
+
     private String districtURL = "https://corporateclash.net/api/v1/districts/";
     public static DistrictManager standard = new DistrictManager();
     final JSONParser jsonParser = new JSONParser();
@@ -81,6 +105,7 @@ public class DistrictManager {
     }
 
     public String[] getDistrictNames() {
+        if (districts == null) return staticDistricts;
         String[] dists = new String[districts.size()];
         int count = 0;
         for(District d : districts) dists[count++] = d.name;

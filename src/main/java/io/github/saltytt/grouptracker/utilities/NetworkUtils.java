@@ -16,7 +16,9 @@ public class NetworkUtils {
                     .build();
 
             Response response = okHttpClient.newCall(request).execute();
-            return (response.code() == 200) ? response.body().string() : null;
+            String res = (response.code() == 200) ? response.body().string() : null;
+            //response.close();
+            return res;
         } catch(IOException e) { return null; }
     }
 }
