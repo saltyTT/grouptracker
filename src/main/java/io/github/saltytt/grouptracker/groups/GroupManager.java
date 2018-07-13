@@ -17,7 +17,7 @@ public class GroupManager {
     private ArrayList<GroupMember> members;
     private ArrayList<GroupBuilder> builders;
 
-    GroupManager() {
+    public GroupManager() {
         groups = new ArrayList<>();
         members = new ArrayList<>();
         builders = new ArrayList<>();
@@ -72,7 +72,6 @@ public class GroupManager {
         public void run() {
             for (Iterator<Group> iter = GroupManager.standard.getGroups().iterator(); iter.hasNext(); )
                 iter.next().refresh();
-            DistrictManager.standard.refreshDistricts();
         }
     }
 }

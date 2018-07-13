@@ -11,7 +11,7 @@ import java.net.URLDecoder;
 
 public class Main {
 
-    static Bot groupTracker;
+    public static Bot groupTracker;
     private static final String JAR_PATH = Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     private static final String TEST_PATH = "/Users/adam/Desktop/dt/Other/discord/Bots/grouptrackerconfig";
     public static String FILE_PATH;
