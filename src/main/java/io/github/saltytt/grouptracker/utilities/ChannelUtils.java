@@ -2,7 +2,6 @@ package io.github.saltytt.grouptracker.utilities;
 
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class ChannelUtils {
 

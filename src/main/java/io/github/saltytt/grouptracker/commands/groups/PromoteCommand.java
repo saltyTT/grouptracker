@@ -1,16 +1,25 @@
-package io.github.saltytt.grouptracker.commands;
+package io.github.saltytt.grouptracker.commands.groups;
 
+import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.groups.Group;
 import io.github.saltytt.grouptracker.groups.GroupManager;
 import io.github.saltytt.grouptracker.groups.GroupMember;
+import io.github.saltytt.grouptracker.settings.Settings;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class PromoteCommand extends BasicCommand {
+public class PromoteCommand extends Command {
 
-    public PromoteCommand() { super("promote"); }
+    public PromoteCommand() {
+        super(
+                "promote",
+                "promote <@user>",
+                "Promotes a user in your group to the group leader",
+                Settings.prefix + "promote @zed"
+        );
+    }
 
     @Override
     public void execute(MessageReceivedEvent context, String args) {

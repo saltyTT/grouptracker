@@ -36,7 +36,7 @@ public class GroupBuilder {
         this.postTo = channel;
 
         timeoutTimer = new Timer();
-        timeoutTimer.schedule(new GroupBuilder.InactiveTimer(this),30*1000);
+        timeoutTimer.schedule(new InactiveTimer(this),30*1000);
 
         message = context.getChannel().sendMessage(buildActivity()).complete();
         message.addReaction(u_one).queue();
@@ -53,7 +53,7 @@ public class GroupBuilder {
     public void handleEvent(MessageReactionAddEvent context) {
         timeoutTimer.cancel();
         timeoutTimer = new Timer();
-        timeoutTimer.schedule(new GroupBuilder.InactiveTimer(this),30*1000);
+        timeoutTimer.schedule(new InactiveTimer(this),30*1000);
 
         switch (step) {
             case 0:
@@ -64,7 +64,7 @@ public class GroupBuilder {
         }
 
         try { context.getReaction().removeReaction(context.getUser()).queue(); }
-        catch (ErrorResponseException e) {return;}
+        catch (ErrorResponseException e) { return; }
     }
 
     private void chooseActivity(MessageReactionAddEvent context) {
@@ -82,7 +82,6 @@ public class GroupBuilder {
                 return;
         }
         step++;
-
     }
 
     public void confirmGroup(MessageReactionAddEvent context) {
@@ -103,8 +102,6 @@ public class GroupBuilder {
         return builder.build();
     }
 
-
-
     private class InactiveTimer extends TimerTask {
         private GroupBuilder builder;
         private InactiveTimer(GroupBuilder builder) {
@@ -116,6 +113,5 @@ public class GroupBuilder {
             message.delete().queue();
             builder.timeoutTimer.cancel();
         }
-
     }
 }

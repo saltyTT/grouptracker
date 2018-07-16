@@ -3,7 +3,6 @@ package io.github.saltytt.grouptracker.core;
 import io.github.saltytt.grouptracker.groups.Group;
 import io.github.saltytt.grouptracker.groups.GroupBuilder;
 import io.github.saltytt.grouptracker.groups.GroupManager;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
 
 public class ReactionHandler {

@@ -13,7 +13,6 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-
 public class Group {
 
     public GroupMember creator;
@@ -50,7 +49,6 @@ public class Group {
         groupMessage.addReaction(removeEm).queue();
         groupMessage.addReaction(leaveEm).queue();
         groupMessage.addReaction(disbandEm).queue();
-
     }
 
     public boolean hasRoomFor(int userCount) {
@@ -205,11 +203,5 @@ public class Group {
         else refresh();
         context.getReaction().removeReaction(context.getUser()).complete();
 
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        if (groupMessage != null) groupMessage.delete().queue();
     }
 }

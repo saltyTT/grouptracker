@@ -1,12 +1,22 @@
-package io.github.saltytt.grouptracker.commands;
+package io.github.saltytt.grouptracker.commands.groups;
 
+import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.groups.GroupManager;
 import io.github.saltytt.grouptracker.groups.GroupMember;
+import io.github.saltytt.grouptracker.settings.Settings;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class AddCommand extends BasicCommand {
+public class AddCommand extends Command {
 
-    public AddCommand() { super("add"); }
+    public AddCommand() {
+        super(
+                "add",
+                "add (number to add)",
+                "Adds one or more members to your party",
+                Settings.prefix + "add\n" +
+                        Settings.prefix + "add 2"
+        );
+    }
 
     @Override
     public void execute(MessageReceivedEvent context, String args) {

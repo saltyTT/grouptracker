@@ -48,7 +48,6 @@ public class Database {
         return performMutation(mutation);
     }
 
-
     private boolean performMutation(String mutation) {
         boolean success = false;
         try {

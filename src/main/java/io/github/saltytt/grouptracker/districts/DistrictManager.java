@@ -44,15 +44,14 @@ public class DistrictManager {
     private String districtURL = "https://corporateclash.net/api/v1/districts/";
     public static DistrictManager standard = new DistrictManager();
     final JSONParser jsonParser = new JSONParser();
-    final String TFN_ID = "384650260439629836";
 
     DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
     public ArrayList<District> districts;
-    private boolean authUp = true;
-    public int authDownCount = 0;
+    private boolean loginUp = true;
+    private boolean gameUp = true;
+    public int loginDownCount = 0;
     private int totalPop;
-    private Role role;
 
     public DistrictManager() {
         Timer refreshTimer = new Timer();
@@ -62,10 +61,7 @@ public class DistrictManager {
                 DistrictManager.standard.refreshDistricts();
             }
         },1000*20, 1000*20);
-
-        role = Bot.groupTracker.getGuildById(TFN_ID).getRolesByName("gam",false).get(0);
     }
-
 
     public void refreshDistricts() {
         String res = NetworkUtils.getResponseFromURL(districtURL);
@@ -157,18 +153,25 @@ public class DistrictManager {
             builder.addField(d.name, info, true);
         }
 
-        if (pop > totalPop+20 && !authUp) {
-            authUp = true;
-            if (authDownCount > 2) pingNoobs();
-            authDownCount = 0;
+        if (!loginUp && pop > totalPop+20) {
+            loginUp = gameUp = true;
+            if (loginDownCount > 2) notifyGameUp();
+            loginDownCount = 0;
+        }
+        if (!gameUp && pop > 10) {
+            loginUp = gameUp = true;
+            notifyGameUp();
+            loginDownCount = 0;
         }
 
-        if (authDownCount > 0) authUp = false;
+        if (loginDownCount > 0) loginUp = false;
+        if (pop == 0) gameUp = false;
 
         Color col;
-        if (pop < 800) col = Color.green;
-        else if (pop < 1200) col = Color.yellow;
-        else col = Color.orange;
+        if (pop < 1000) col = Color.green;
+        else if (pop < 1250) col = Color.yellow;
+        else if (pop < 1750) col = Color.orange;
+        else col = Color.red;
 
         (builder)
             .addBlankField(false)
@@ -183,28 +186,40 @@ public class DistrictManager {
     }
 
     private MessageEmbed buildAuth() {
+        Color col;
+        String message;
 
-        Color col = authUp? Color.green : Color.red;
-
-        String message = authUp?
-                "Log in servers are likely online"
-                :
-                String.format("Log in servers have been reported down %s time" + (authDownCount==1 ? "" : "s"), authDownCount);
+        if (!gameUp) {
+            col = Color.red;
+            message = "The game is not currently online";
+        } else if (!loginUp) {
+            col = Color.orange;
+            message = String.format("Log in servers have been reported offline "+ loginDownCount + " times");
+        } else if (loginDownCount > 0) {
+            col = Color.yellow;
+            message = String.format("Log in servers have been reported offline %s time" + (loginDownCount ==1 ? "" : "s"), loginDownCount);
+        } else {
+            col = Color.green;
+            message = "Log in servers have not been reported offline";
+        }
 
         EmbedBuilder builder = new EmbedBuilder()
-            .setTitle("LOG IN STATUS")
+            .setTitle("GAME STATUS")
             .addField("", message, false)
+            .addBlankField(false)
+            .setFooter("Type +down in a chat with the bot (not this one) to report the log in down", null)
             .setColor(col);
 
         return builder.build();
     }
 
-    private void pingNoobs() {
-        try {
-            ChannelUtils.getTextChannelFromName(Bot.groupTracker.getGuildById(TFN_ID), "gam-up")
-                    .sendMessage(role.getAsMention() + " gam probably up").queue();
-        } catch (NullPointerException e) { e.printStackTrace(); }
+    private void notifyGameUp() {
+        for (Guild g : Bot.groupTracker.getGuilds()) {
+            Role toPing;
+            try { toPing = g.getRolesByName("gam", false).get(0); }
+            catch (NullPointerException e) { continue; }
+            MessageChannel chan = ChannelUtils.getTextChannelFromName(g, "gam-up");
+            if (chan != null) chan.sendMessage(toPing.getAsMention() + " gam probably up");
+        }
     }
-
-
 }

@@ -8,14 +8,13 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-
 public class Main {
 
     public static Bot groupTracker;
+
     private static final String JAR_PATH = Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     private static final String TEST_PATH = "/Users/adam/Desktop/dt/Other/discord/Bots/grouptrackerconfig";
     public static String FILE_PATH;
-
 
     public static void main(String[] args) {
         FILE_PATH = TEST_PATH;//decodePath();
@@ -23,7 +22,7 @@ public class Main {
         Settings.load();
         Database.init();
 
-        groupTracker = new Bot(Settings.getBotToken());
+        groupTracker = new Bot(Settings.token, Settings.prefix, Settings.aList);
     }
 
     private static String decodePath() {
@@ -36,5 +35,4 @@ public class Main {
         decoded = (new File(decoded)).getParentFile().getPath();
         return decoded;
     }
-
 }

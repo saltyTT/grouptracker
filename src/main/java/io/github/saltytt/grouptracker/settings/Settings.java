@@ -4,18 +4,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import io.github.saltytt.grouptracker.Main;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Settings {
 
-    private static String token = "";
+    public static String token = "";
     public static String prefix = "";
-
-    public static String getBotToken() { return Settings.token; }
+    public static ArrayList<String> aList = new ArrayList<>();
 
     public static void load() {
 
@@ -41,6 +42,8 @@ public class Settings {
                 System.exit(0);
             }
 
+            JSONArray admins = (JSONArray) mainBlock.get("admins");
+            for (Object a : admins) aList.add((String) a);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -2,7 +2,6 @@ package io.github.saltytt.grouptracker.utilities;
 
 import io.github.saltytt.grouptracker.Main;
 import io.github.saltytt.grouptracker.core.Bot;
-import io.github.saltytt.grouptracker.districts.District;
 import io.github.saltytt.grouptracker.districts.DistrictManager;
 import io.github.saltytt.grouptracker.groups.Group;
 import io.github.saltytt.grouptracker.groups.GroupManager;
@@ -18,14 +17,16 @@ public class GeneralUtils {
     }
 
     public static void restart(boolean shutdown) {
+
         ArrayList<Group> groups = GroupManager.standard.getGroups();
         for (Group group : groups) group.safeDisband();
         groups.removeAll(groups);
+
         Main.groupTracker.groupTracker.shutdown();
         if (shutdown) System.exit(0);
         try {
             Thread.sleep(2000);
-            Main.groupTracker = new Bot(Settings.getBotToken());
+            Main.groupTracker = new Bot(Settings.token, Settings.prefix, Settings.aList);
             DistrictManager.standard = new DistrictManager();
             DistrictManager.standard.refreshDistricts();
             GroupManager.standard = new GroupManager();

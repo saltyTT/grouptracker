@@ -1,13 +1,20 @@
-package io.github.saltytt.grouptracker.commands;
+package io.github.saltytt.grouptracker.commands.groups;
 
+import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.groups.Group;
 import io.github.saltytt.grouptracker.groups.GroupManager;
+import io.github.saltytt.grouptracker.settings.Settings;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class DisbandCommand extends BasicCommand {
+public class DisbandCommand extends Command {
 
     public DisbandCommand() {
-        super("disband");
+        super(
+                "disband",
+                "disband",
+                "Disbands your group if you are the leader",
+                Settings.prefix + "disband"
+        );
     }
 
     @Override

@@ -1,16 +1,24 @@
-package io.github.saltytt.grouptracker.commands;
+package io.github.saltytt.grouptracker.commands.groups;
 
+import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.groups.Group;
 import io.github.saltytt.grouptracker.groups.GroupManager;
+import io.github.saltytt.grouptracker.settings.Settings;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class JoinCommand extends BasicCommand {
+public class JoinCommand extends Command {
 
     public JoinCommand() {
-        super("join");
+        super(
+                "join",
+                "join (number in party) <@user>",
+                "Joins a user's group with one or more party members",
+                Settings.prefix + "join @zed\n" +
+                        Settings.prefix + "join 2 @zed"
+        );
     }
 
     @Override

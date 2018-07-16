@@ -1,8 +1,6 @@
 package io.github.saltytt.grouptracker.groups;
 
-import io.github.saltytt.grouptracker.districts.DistrictManager;
 import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.exceptions.ErrorResponseException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,10 +20,16 @@ public class GroupManager {
         members = new ArrayList<>();
         builders = new ArrayList<>();
         Timer refreshTimer = new Timer();
-        refreshTimer.schedule(new RefreshTimer(),REFRESH_MIN*1000*60, REFRESH_MIN*1000*60);
+        refreshTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                for (Iterator<Group> iter = GroupManager.standard.getGroups().iterator(); iter.hasNext();)
+                    iter.next().refresh();
+            }
+        },REFRESH_MIN*1000*60, REFRESH_MIN*1000*60);
     }
 
-    public void init() {}
+    public void init(){}
 
     public Group groupForUser(User user) {
         GroupMember member = memberForUser(user);
@@ -67,11 +71,4 @@ public class GroupManager {
 
     public void add(GroupBuilder builder) { builders.add(builder); }
 
-    private class RefreshTimer extends TimerTask {
-        @Override
-        public void run() {
-            for (Iterator<Group> iter = GroupManager.standard.getGroups().iterator(); iter.hasNext(); )
-                iter.next().refresh();
-        }
-    }
 }

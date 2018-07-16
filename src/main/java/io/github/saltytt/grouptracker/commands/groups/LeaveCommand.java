@@ -1,13 +1,20 @@
-package io.github.saltytt.grouptracker.commands;
+package io.github.saltytt.grouptracker.commands.groups;
 
+import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.groups.GroupManager;
 import io.github.saltytt.grouptracker.groups.GroupMember;
+import io.github.saltytt.grouptracker.settings.Settings;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class LeaveCommand extends BasicCommand {
+public class LeaveCommand extends Command {
 
     public LeaveCommand() {
-        super("leave");
+        super(
+                "leave",
+                "leave",
+                "Leaves the group you are in",
+                Settings.prefix + "leave"
+        );
     }
 
     @Override

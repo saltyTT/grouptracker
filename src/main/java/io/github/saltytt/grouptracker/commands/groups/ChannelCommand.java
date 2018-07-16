@@ -1,15 +1,23 @@
-package io.github.saltytt.grouptracker.commands;
+package io.github.saltytt.grouptracker.commands.groups;
 
+import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.settings.Database;
+import io.github.saltytt.grouptracker.settings.Settings;
 import io.github.saltytt.grouptracker.utilities.ChannelUtils;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class ChannelCommand extends BasicCommand {
+public class ChannelCommand extends Command {
 
     public ChannelCommand() {
-        super("channel");
+        super(
+                "channel",
+                "channel\nchannel set <channel name>",
+                "Responds with the group channel\nSets the group channel to the specified channel (requires ADMIN permission)",
+                Settings.prefix + "channel\n" +
+                        Settings.prefix + "channel set groups-chan"
+        );
     }
 
     @Override
