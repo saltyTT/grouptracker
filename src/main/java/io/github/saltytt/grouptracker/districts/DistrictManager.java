@@ -153,14 +153,13 @@ public class DistrictManager {
             builder.addField(d.name, info, true);
         }
 
-        if (!loginUp && pop > totalPop+20) {
-            loginUp = gameUp = true;
-            if (loginDownCount > 2) notifyGameUp();
-            loginDownCount = 0;
-        }
-        if (!gameUp && pop > 10) {
+        if (!gameUp && pop > 15) {
             loginUp = gameUp = true;
             notifyGameUp();
+            loginDownCount = 0;
+        } else if (!loginUp && pop > totalPop+20) {
+            loginUp = gameUp = true;
+            if (loginDownCount > 2) notifyGameUp();
             loginDownCount = 0;
         }
 
@@ -191,7 +190,7 @@ public class DistrictManager {
 
         if (!gameUp) {
             col = Color.red;
-            message = "The game is not currently online";
+            message = "The game is currently offline";
         } else if (!loginUp) {
             col = Color.orange;
             message = String.format("Log in servers have been reported offline "+ loginDownCount + " times");
@@ -215,11 +214,12 @@ public class DistrictManager {
 
     private void notifyGameUp() {
         for (Guild g : Bot.groupTracker.getGuilds()) {
-            Role toPing;
-            try { toPing = g.getRolesByName("gam", false).get(0); }
-            catch (NullPointerException e) { continue; }
+            List<Role> roles = g.getRolesByName("gam",false);
+            if (roles.isEmpty()) continue;
+            Role toPing = roles.get(0);
+
             MessageChannel chan = ChannelUtils.getTextChannelFromName(g, "gam-up");
-            if (chan != null) chan.sendMessage(toPing.getAsMention() + " gam probably up");
+            if (chan != null) chan.sendMessage(toPing.getAsMention() + " gam probably up").queue();
         }
     }
 }
