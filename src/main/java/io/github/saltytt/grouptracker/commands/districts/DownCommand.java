@@ -1,11 +1,10 @@
 package io.github.saltytt.grouptracker.commands.districts;
 
-import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.districts.DistrictManager;
 import io.github.saltytt.grouptracker.settings.Settings;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class DownCommand extends Command {
+public class DownCommand extends CommandDistrict {
 
     public DownCommand() {
         super(

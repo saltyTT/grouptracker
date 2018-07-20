@@ -2,6 +2,7 @@ package io.github.saltytt.grouptracker.districts;
 
 import io.github.saltytt.grouptracker.core.Bot;
 import io.github.saltytt.grouptracker.utilities.ChannelUtils;
+import io.github.saltytt.grouptracker.utilities.GeneralUtils;
 import io.github.saltytt.grouptracker.utilities.NetworkUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
@@ -45,7 +46,7 @@ public class DistrictManager {
     public static DistrictManager standard = new DistrictManager();
     final JSONParser jsonParser = new JSONParser();
 
-    DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     public ArrayList<District> districts;
     private boolean loginUp = true;
@@ -85,7 +86,7 @@ public class DistrictManager {
                         (long) dist.get("population"),
                         (boolean) dist.get("invasion_online"),
                         (long) dist.get("last_update"),
-                        (String) dist.get("cogs_attacking"),
+                        GeneralUtils.getCorrectCog((String) dist.get("cogs_attacking")),
                         (long) dist.get("count_defeated"),
                         (long) dist.get("count_total"),
                         (long) dist.get("remaining_time")
@@ -187,23 +188,29 @@ public class DistrictManager {
     private MessageEmbed buildAuth() {
         Color col;
         String message;
+        String imgURL;
 
         if (!gameUp) {
             col = Color.red;
             message = "The game is currently offline";
+            imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/dc0a6320d907631d34e6655dff176295.png?raw=true";
         } else if (!loginUp) {
             col = Color.orange;
             message = String.format("Log in servers have been reported offline "+ loginDownCount + " times");
+            imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/b04ecfe13d61a869b4c47a276b51b634.png?raw=true";
         } else if (loginDownCount > 0) {
             col = Color.yellow;
-            message = String.format("Log in servers have been reported offline %s time" + (loginDownCount ==1 ? "" : "s"), loginDownCount);
+            message = String.format("Log in servers have been reported offline %s time" + (loginDownCount == 1 ? "" : "s"), loginDownCount);
+            imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/b04ecfe13d61a869b4c47a276b51b634.png?raw=true";
         } else {
             col = Color.green;
             message = "Log in servers have not been reported offline";
+            imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/c6b26ba81f44b0c43697852e1e1d1420.png?raw=true";
         }
 
         EmbedBuilder builder = new EmbedBuilder()
             .setTitle("GAME STATUS")
+            .setThumbnail(imgURL)
             .addField("", message, false)
             .addBlankField(false)
             .setFooter("Type +down in a chat with the bot (not this one) to report the log in down", null)

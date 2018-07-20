@@ -1,12 +1,11 @@
 package io.github.saltytt.grouptracker.commands.groups;
 
-import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.groups.GroupManager;
 import io.github.saltytt.grouptracker.groups.GroupMember;
 import io.github.saltytt.grouptracker.settings.Settings;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class AddCommand extends Command {
+public class AddCommand extends CommandGroup {
 
     public AddCommand() {
         super(

@@ -1,6 +1,5 @@
 package io.github.saltytt.grouptracker.commands.groups;
 
-import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.groups.Group;
 import io.github.saltytt.grouptracker.groups.GroupManager;
 import io.github.saltytt.grouptracker.settings.Settings;
@@ -9,7 +8,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class JoinCommand extends Command {
+public class JoinCommand extends CommandGroup {
 
     public JoinCommand() {
         super(

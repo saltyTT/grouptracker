@@ -4,20 +4,20 @@ import io.github.saltytt.grouptracker.settings.Settings;
 import io.github.saltytt.grouptracker.utilities.GeneralUtils;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class ShutdownCommand extends CommandAdmin {
+public class InviteBotCommand extends CommandAdmin {
 
-    public ShutdownCommand() {
+    public InviteBotCommand() {
         super(
-                "shutdown",
-                "shutdown",
-                "Shuts down the bot (owner only)",
-                Settings.prefix + "restart"
+                "invitebot",
+                "invitebot",
+                "Gets bot invite link (owner only)",
+                Settings.prefix + "invitebot"
         );
     }
 
     @Override
     public void execute(MessageReceivedEvent context, String args) {
         if (GeneralUtils.isBotOwner(context.getAuthor()))
-            GeneralUtils.restart(true);
+            context.getChannel().sendMessage("https://discordapp.com/oauth2/authorize?client_id=466007702070362123&scope=bot").queue();
     }
 }

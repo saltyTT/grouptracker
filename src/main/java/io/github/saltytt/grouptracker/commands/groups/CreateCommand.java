@@ -1,6 +1,5 @@
 package io.github.saltytt.grouptracker.commands.groups;
 
-import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.groups.GroupBuilder;
 import io.github.saltytt.grouptracker.groups.GroupManager;
 import io.github.saltytt.grouptracker.settings.Database;
@@ -11,7 +10,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class CreateCommand extends Command {
+public class CreateCommand extends CommandGroup {
 
     public CreateCommand() {
         super(

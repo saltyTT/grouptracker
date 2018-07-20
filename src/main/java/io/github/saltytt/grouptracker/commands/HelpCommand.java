@@ -17,7 +17,9 @@ public class HelpCommand extends Command {
             "help (command name)",
             "Shows a list of all commands or information about a specific command",
                 Settings.prefix + "help\n" +
-                        Settings.prefix + "help create"
+                        Settings.prefix + "help create",
+                Color.white,
+                false
         );
     }
 
@@ -47,7 +49,7 @@ public class HelpCommand extends Command {
                 .addField("Description", cmd.desc, false)
                 .addField("Usage", cmd.usage, false)
                 .addField("Examples", cmd.examples, false)
-                .setColor(Color.WHITE)
+                .setColor(cmd.colour)
                 .setFooter("Variables: (optional) <required>",null)
                 .build();
     }

@@ -1,11 +1,8 @@
 package io.github.saltytt.grouptracker.core;
 
-import io.github.saltytt.grouptracker.Main;
 import io.github.saltytt.grouptracker.commands.HelpCommand;
-import io.github.saltytt.grouptracker.commands.admin.RestartCommand;
-import io.github.saltytt.grouptracker.commands.admin.ShutdownCommand;
+import io.github.saltytt.grouptracker.commands.admin.*;
 import io.github.saltytt.grouptracker.commands.districts.DownCommand;
-import io.github.saltytt.grouptracker.commands.districts.ForceCommand;
 import io.github.saltytt.grouptracker.commands.districts.NotifyCommand;
 import io.github.saltytt.grouptracker.commands.groups.*;
 import io.github.saltytt.grouptracker.districts.DistrictManager;
@@ -41,6 +38,8 @@ public class Bot {
                 .buildBlocking();
 
         commandHandler = new CommandHandler()
+                .registerCommand(new HelpCommand())
+
                 .registerCommand(new AddCommand())
                 .registerCommand(new BumpCommand())
                 .registerCommand(new ChannelCommand())
@@ -49,14 +48,17 @@ public class Bot {
                 .registerCommand(new DisbandAllCommand())
                 .registerCommand(new JoinCommand())
                 .registerCommand(new LeaveCommand())
-                .registerCommand(new RemoveCommand())
                 .registerCommand(new PromoteCommand())
-                .registerCommand(new ForceCommand())
+                .registerCommand(new RemoveCommand())
+
                 .registerCommand(new DownCommand())
-                .registerCommand(new ShutdownCommand())
-                .registerCommand(new RestartCommand())
                 .registerCommand(new NotifyCommand())
-                .registerCommand(new HelpCommand());
+
+                .registerCommand(new ForceUpdateCommand())
+                .registerCommand(new InviteBotCommand())
+                .registerCommand(new LeaveGuildCommand())
+                .registerCommand(new RestartCommand())
+                .registerCommand(new ShutdownCommand());
         reactionHandler = new ReactionHandler();
         DistrictManager.standard.refreshDistricts();
         GroupManager.standard.init();

@@ -1,6 +1,5 @@
 package io.github.saltytt.grouptracker.commands.groups;
 
-import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.settings.Database;
 import io.github.saltytt.grouptracker.settings.Settings;
 import io.github.saltytt.grouptracker.utilities.ChannelUtils;
@@ -8,7 +7,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class ChannelCommand extends Command {
+public class ChannelCommand extends CommandGroup {
 
     public ChannelCommand() {
         super(

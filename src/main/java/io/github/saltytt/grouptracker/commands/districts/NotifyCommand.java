@@ -1,13 +1,12 @@
 package io.github.saltytt.grouptracker.commands.districts;
 
-import io.github.saltytt.grouptracker.commands.Command;
 import io.github.saltytt.grouptracker.settings.Settings;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class NotifyCommand extends Command {
+public class NotifyCommand extends CommandDistrict {
 
     public NotifyCommand() {
         super(
@@ -20,7 +19,10 @@ public class NotifyCommand extends Command {
     @Override
     public void execute(MessageReceivedEvent context, String args) {
         List<Role> roles = context.getGuild().getRolesByName("gam",false);
-        if (roles.isEmpty()) return;
+        if (roles.isEmpty()) {
+            context.getChannel().sendMessage("Notifications have not been configured in this server").queue();
+            return;
+        }
 
         Role role = roles.get(0);
 
