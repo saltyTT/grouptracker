@@ -1,8 +1,6 @@
 package io.github.saltytt.grouptracker.utilities;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 
 import java.io.IOException;
 
@@ -20,5 +18,23 @@ public class NetworkUtils {
             response.close();
             return res;
         } catch (IOException e) { return null; }
+    }
+
+    public static String postResponseFromURL(String url, RequestBody header) {
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(header)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+
+            String res = (response.code() == 200) ? response.body().string() : null;
+
+            return res;
+
+        } catch(IOException e) { return null; }
     }
 }

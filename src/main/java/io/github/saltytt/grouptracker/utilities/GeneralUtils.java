@@ -18,9 +18,9 @@ public class GeneralUtils {
     private static String[][] cogList = {
             { "Cold Caller", "Telemarketer", "Name Dropper", "Glad Hander", "Mover and Shaker", "Two Face", "The Mingler", "Mr. Hollywood" },
             { "Short Change", "Penny Pincher", "Tightwad", "Bean Counter", "Number Cruncher", "Money Bags", "Loan Shark", "Robber Baron" },
-            { "Bottom Feeder", "Bloodsucker", "Double Talker", "Ambulance Chaser", "Backstabber", "Spin Doctor", "Legal Eagle", "Big Wig" },
+            { "Bottom Feeder", "Bloodsucker", "Double Talker", "Ambulance Chaser", "Back Stabber", "Spin Doctor", "Legal Eagle", "Big Wig" },
             { "Flunky", "Pencil Pusher", "Yesman", "Micromanager", "Downsizer", "Head Hunter", "Corporate Raider", "The Big Cheese" },
-            { "Con Artists", "Connoisseur", "The Swindler", "Middleman", "Toxic Manager", "Magnate", "Big Fish", "Head Honcho" },
+            { "Con Artist", "Connoisseur", "The Swindler", "Middleman", "Toxic Manager", "Magnate", "Big Fish", "Head Honcho" },
     };
 
     public static String indexToString(int index) {

@@ -16,6 +16,8 @@ public class Settings {
 
     public static String token = "";
     public static String prefix = "";
+    public static String testUser = "";
+    public static String testPass = "";
     public static ArrayList<String> aList = new ArrayList<>();
 
     public static void load() {
@@ -39,6 +41,14 @@ public class Settings {
 
             if (prefix.equals("")) {
                 System.out.println("No bot prefix configured, shutting down");
+                System.exit(0);
+            }
+
+            testUser = (String) mainBlock.get("testuser");
+            testPass = (String) mainBlock.get("testpass");
+
+            if (testPass.equals("") || testUser.equals("")) {
+                System.out.println("No test account configured, shutting down");
                 System.exit(0);
             }
 

@@ -194,26 +194,33 @@ public class DistrictManager {
             col = Color.red;
             message = "The game is currently offline";
             imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/dc0a6320d907631d34e6655dff176295.png?raw=true";
-        } else if (!loginUp) {
+        } else if (!StatusManager.standard.loginAPI) {
             col = Color.orange;
-            message = String.format("Log in servers have been reported offline "+ loginDownCount + " times");
+            message = String.format(":x: Login API is down");
+            imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/b04ecfe13d61a869b4c47a276b51b634.png?raw=true";
+        } else if (loginDownCount > 2) {
+            col = Color.orange;
+            message = String.format(":warning: Authentication has been reported offline "+ loginDownCount + " times");
             imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/b04ecfe13d61a869b4c47a276b51b634.png?raw=true";
         } else if (loginDownCount > 0) {
             col = Color.yellow;
-            message = String.format("Log in servers have been reported offline %s time" + (loginDownCount == 1 ? "" : "s"), loginDownCount);
+            message = String.format(":warning: Authentication has been reported offline %s time" + (loginDownCount == 1 ? "" : "s"), loginDownCount);
             imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/b04ecfe13d61a869b4c47a276b51b634.png?raw=true";
         } else {
             col = Color.green;
-            message = "Log in servers have not been reported offline";
+            message = ":white_check_mark: Authentication has not been reported offline";
             imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/c6b26ba81f44b0c43697852e1e1d1420.png?raw=true";
         }
+
+        StatusManager.standard.checkStatus();
 
         EmbedBuilder builder = new EmbedBuilder()
             .setTitle("GAME STATUS")
             .setThumbnail(imgURL)
-            .addField("", message, false)
-            .addBlankField(false)
-            .setFooter("Type +down in a chat with the bot (not this one) to report the log in down", null)
+            .addField("Login API", StatusManager.standard.loginAPI ? ":white_check_mark: Online" : ":x:" + StatusManager.standard.loginMsg, false)
+            .addField("Gameserver", StatusManager.standard.gameserver ? ":white_check_mark: Online" : ":x: Offline" , false)
+            .addField("Authentication", message, false)
+            .setFooter("Authentication can not be checked automatically, and thus relies on user reports.\n",null)
             .setColor(col);
 
         return builder.build();
