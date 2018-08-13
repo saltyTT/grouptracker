@@ -32,7 +32,7 @@ public class HelpCommand extends Command {
         EmbedBuilder builder = new EmbedBuilder()
                 .setTitle("Command List")
                 .setColor(java.awt.Color.WHITE)
-                .setFooter("Use " + Main.groupTracker.prefix + "help (command name) to get more information about a single command", null);
+                .setFooter("Use " + Main.bot.prefix + "help (command name) to get more information about a single command", null);
         for(Command c : Bot.commandHandler.commands.values()) {
             if (c.ownerOnly) continue;
             builder.addField(c.name, c.desc, false);

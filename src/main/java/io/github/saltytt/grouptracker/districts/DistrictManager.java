@@ -138,7 +138,7 @@ public class DistrictManager {
         for (District d : districts) {
             if (!d.online || d.invasionOnline) continue;
             pop+=d.population;
-            final String info = "Population: " + d.population;
+            final String info = "Population:  " + d.population;
             builder.addField(d.name, info, true);
         }
 
@@ -148,9 +148,10 @@ public class DistrictManager {
             if (!d.online || !d.invasionOnline) continue;
             pop+=d.population;
             final String info =
-                    "Population: " + d.population + "\n" +
-                    "Invasion: " + d.cogsAttacking + "\n" +
-                    "Time Left: " + d.remainingTime/60 + ":" + (d.remainingTime%60 > 9 ? "" : "0") + d.remainingTime%60;
+                    "Population:  " + d.population + "\n" +
+                    "Invasion:  " + d.cogsAttacking + "\n" +
+                    "Cogs Defeated:  " + d.countDefeated + "/" + d.countTotal + "\n" +
+                    "Remaining Time:  " + d.remainingTime/60 + ":" + (d.remainingTime%60 > 9 ? "" : "0") + d.remainingTime%60;
             builder.addField(d.name, info, true);
         }
 
@@ -192,7 +193,7 @@ public class DistrictManager {
 
         if (!gameUp) {
             col = Color.red;
-            message = "The game is currently offline";
+            message = ":x: The game is currently offline";
             imgURL = "https://github.com/saltyTT/grouptracker/blob/master/src/main/resources/dc0a6320d907631d34e6655dff176295.png?raw=true";
         } else if (!StatusManager.standard.loginAPI) {
             col = Color.orange;
@@ -217,8 +218,9 @@ public class DistrictManager {
         EmbedBuilder builder = new EmbedBuilder()
             .setTitle("GAME STATUS")
             .setThumbnail(imgURL)
-            .addField("Login API", StatusManager.standard.loginAPI ? ":white_check_mark: Online" : ":x:" + StatusManager.standard.loginMsg, false)
-            .addField("Gameserver", StatusManager.standard.gameserver ? ":white_check_mark: Online" : ":x: Offline" , false)
+            .addField("Login API", StatusManager.standard.loginAPI ? ":white_check_mark: Online" : ":x: " + StatusManager.standard.loginMsg, false)
+            .addField("Website", StatusManager.standard.website ? ":white_check_mark: Online" : ":x: Offline", false)
+            .addField("Game Server", StatusManager.standard.gameserver ? ":white_check_mark: Online" : ":x: Offline" , false)
             .addField("Authentication", message, false)
             .setFooter("Authentication can not be checked automatically, and thus relies on user reports.\n",null)
             .setColor(col);

@@ -44,11 +44,11 @@ public class GeneralUtils {
         for (Group group : groups) group.safeDisband();
         groups.removeAll(groups);
 
-        Main.groupTracker.groupTracker.shutdown();
+        Main.bot.groupTracker.shutdown();
         if (shutdown) System.exit(0);
         try {
             Thread.sleep(2000);
-            Main.groupTracker = new Bot(Settings.token, Settings.prefix, Settings.aList);
+            Main.bot = new Bot(Settings.token, Settings.prefix, Settings.aList);
             DistrictManager.standard = new DistrictManager();
             DistrictManager.standard.refreshDistricts();
             GroupManager.standard = new GroupManager();
@@ -59,6 +59,6 @@ public class GeneralUtils {
     }
 
     public static boolean isBotOwner(User u) {
-        return Main.groupTracker.adminList.contains(u.getId());
+        return Main.bot.adminList.contains(u.getId());
     }
 }

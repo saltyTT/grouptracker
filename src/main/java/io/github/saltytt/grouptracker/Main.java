@@ -10,7 +10,7 @@ import java.net.URLDecoder;
 
 public class Main {
 
-    public static Bot groupTracker;
+    public static Bot bot;
 
     private static final String JAR_PATH = Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     private static final String TEST_PATH = "/Users/adam/Desktop/dt/Other/discord/Bots/grouptrackerconfig";
@@ -22,7 +22,7 @@ public class Main {
         Settings.load();
         Database.init();
 
-        groupTracker = new Bot(Settings.token, Settings.prefix, Settings.aList);
+        bot = new Bot(Settings.token, Settings.prefix, Settings.aList);
     }
 
     private static String decodePath() {

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public abstract class Command {
 
-    boolean ownerOnly = false;
+    boolean ownerOnly;
     public String name;
     public String usage;
     public String desc;

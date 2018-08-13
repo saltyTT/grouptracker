@@ -18,6 +18,7 @@ public class StatusManager {
     public boolean loginAPI = false;
     public String loginMsg = "";
     public boolean gameserver = false;
+    public boolean website = false;
 
     private StatusManager init() { return this; }
 
@@ -29,10 +30,14 @@ public class StatusManager {
                 .addFormDataPart("User-Agent", "Finest Tracker")
                 .build();
         String res = NetworkUtils.postResponseFromURL("https://corporateclash.net/api/v1/login", header);
+        if (res == null) {
+            loginMsg = "The Login API is offline";
+            return false;
+        }
         try {
             JSONObject r = (JSONObject) (new JSONParser().parse(res));
             if ((boolean) r.get("status")) return true;
-            switch ((int) r.get("reason")) {
+            switch ((int) ((long) r.get("reason"))) {
                 case 1004:
                     loginMsg = (String) r.get("friendlyreason");
                     return false;
@@ -41,7 +46,13 @@ public class StatusManager {
                     return false;
             }
 
-        } catch (ParseException e) { return false; }
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    private boolean checkWebsite() {
+        return NetworkUtils.getResponseFromURL("https://corporateclash.net/") != null;
     }
 
     private boolean checkGameserver() {
@@ -57,6 +68,7 @@ public class StatusManager {
     protected void checkStatus() {
         loginAPI = checkLoginAPI();
         gameserver = checkGameserver();
+        website = checkWebsite();
     }
 
 }
