@@ -12,22 +12,18 @@ public class Main {
 
     public static Bot bot;
 
-    private static final String JAR_PATH = Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-    private static final String TEST_PATH = "/Users/adam/Desktop/dt/Other/discord/Bots/grouptrackerconfig";
-    public static String FILE_PATH;
+    public static String JAR_PATH = decodeJarPath();
 
     public static void main(String[] args) {
-        FILE_PATH = TEST_PATH;//decodePath();
-        // swap paths before building jar
         Settings.load();
         Database.init();
 
         bot = new Bot(Settings.token, Settings.prefix, Settings.aList);
     }
 
-    private static String decodePath() {
+    private static String decodeJarPath() {
         String decoded = null;
-        try { decoded =  URLDecoder.decode(JAR_PATH, "UTF-8"); }
+        try { decoded =  URLDecoder.decode(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8"); }
         catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             System.exit(0);

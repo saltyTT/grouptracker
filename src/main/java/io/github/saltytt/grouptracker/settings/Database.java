@@ -10,7 +10,7 @@ public class Database {
 
     public static Database standard;
     private static Connection con;
-    private final String pathToDB = Main.FILE_PATH + "/db/database";
+    private final String pathToDB = Main.JAR_PATH + "/db/database";
     private final String connectionString = String.format("jdbc:hsqldb:file:%s", pathToDB);
 
 

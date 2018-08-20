@@ -27,7 +27,7 @@ public class Settings {
 
         try {
 
-            object = jsonParser.parse(new FileReader(new File(Main.FILE_PATH + "/settings.json")));
+            object = jsonParser.parse(new FileReader(new File(Main.JAR_PATH + "/settings.json")));
             final JSONObject mainBlock = (JSONObject) object;
 
             token = (String) mainBlock.get("token");

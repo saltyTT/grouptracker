@@ -86,7 +86,7 @@ public class DistrictManager {
                         (long) dist.get("population"),
                         (boolean) dist.get("invasion_online"),
                         (long) dist.get("last_update"),
-                        GeneralUtils.getCorrectCog((String) dist.get("cogs_attacking")),
+                        (String) dist.get("cogs_attacking"),
                         (long) dist.get("count_defeated"),
                         (long) dist.get("count_total"),
                         (long) dist.get("remaining_time")
